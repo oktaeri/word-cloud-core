@@ -1,6 +1,6 @@
 package com.wordcloud.core.publisher;
 
-import com.wordcloud.core.dto.TestDto;
+import com.wordcloud.core.dto.UploadDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -22,7 +22,7 @@ public class RabbitMQProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(TestDto testDto) {
+    public void sendMessage(UploadDto testDto) {
         LOGGER.info(String.format("Message sent -> %s", testDto));
         rabbitTemplate.convertAndSend(exchangeName, routingKey, testDto);
     }
