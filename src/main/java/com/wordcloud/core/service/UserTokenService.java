@@ -14,16 +14,26 @@ public class UserTokenService {
     }
 
     public String generateAndSaveToken() {
-        String generatedToken = generateRandomToken();
+        String generatedToken;
+
+        do {
+            generatedToken = generateRandomToken();
+        } while (tokenExists(generatedToken));
+
         UserToken userToken = new UserToken(generatedToken);
         userTokenRepository.postToken(userToken);
         return userToken.getToken();
     }
 
+    private boolean tokenExists(String token) {
+        UserToken existingToken = userTokenRepository.getTokenByText(token);
+        return existingToken != null;
+    }
+
     private String generateRandomToken() {
         RandomStringGenerator generator = new RandomStringGenerator
                 .Builder()
-                .withinRange('a', 'z')
+                .withinRange(new char[]{'0', '9'}, new char[]{'a', 'z'})
                 .build();
 
         return generator.generate(6);
