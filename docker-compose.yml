@@ -16,3 +16,22 @@ services:
     environment:
       - 'RABBITMQ_DEFAULT_USER=guest'
       - 'RABBITMQ_DEFAULT_PASS=guest'
+
+  wordcloud-app:
+    image: 'core:0.0.1-SNAPSHOT'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/wordcloud_db'
+      - 'SPRING_DATASOURCE_USERNAME=postgres'
+      - 'SPRING_DATASOURCE_PASSWORD=postgres'
+      - 'SPRING_FLYWAY_URL=jdbc:postgresql://database:5432/wordcloud_db'
+      - 'SPRING_FLYWAY_PASSWORD=postgres'
+      - 'SPRING_FLYWAY_USER=postgres'
+      - 'RABBITMQ_HOST=rabbitmq'
+      - 'RABBITMQ_PORT=5672'
+      - 'RABBITMQ_USERNAME=guest'
+      - 'RABBITMQ_PASSWORD=guest'
