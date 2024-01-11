@@ -15,10 +15,10 @@ public class UserTokenRepository {
 
     @Transactional
     public UserToken postToken(UserToken token) {
-        if (token.getId() == null) {
+        UserToken existingToken = getTokenByText(token.getToken());
+
+        if (existingToken == null) {
             em.persist(token);
-        } else {
-            em.merge(token);
         }
 
         return token;
