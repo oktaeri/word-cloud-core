@@ -70,3 +70,16 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+flyway {
+	def props = new Properties()
+
+	file("src/main/resources/application.properties")
+			.withInputStream { props.load(it) }
+
+	url = props.getProperty("spring.datasource.url")
+	user = props.getProperty("spring.datasource.username")
+	password = props.getProperty("spring.datasource.password")
+
+	locations = ['classpath:db/migration']
+}
