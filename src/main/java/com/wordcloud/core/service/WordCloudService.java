@@ -20,12 +20,10 @@ public class WordCloudService {
     public List<ResultDto> getUserResult(String userToken) {
         List<WordCount> wordCounts = wordCountRepository.findByUserTokenToken(userToken);
 
-        List<ResultDto> result = wordCounts.stream()
+        return wordCounts.stream()
                 .map(this::mapToResultDto)
                 .sorted(Comparator.comparing(ResultDto::getCount, Comparator.reverseOrder()))
                 .collect(Collectors.toList());
-
-        return result;
     }
 
     private ResultDto mapToResultDto(WordCount wordCount) {

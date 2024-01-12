@@ -12,8 +12,8 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/v1")
 public class UploadController {
-    private RabbitMQProducer producer;
-    private UserTokenService tokenService;
+    private final RabbitMQProducer producer;
+    private final UserTokenService tokenService;
 
     public UploadController(RabbitMQProducer producer, UserTokenService tokenService) {
         this.producer = producer;
@@ -31,6 +31,6 @@ public class UploadController {
 
         producer.sendMessage(uploadDto);
 
-        return ResponseEntity.ok("Message sent to RabbitMQ :)");
+        return ResponseEntity.ok(token);
     }
 }

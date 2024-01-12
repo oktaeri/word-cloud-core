@@ -1,7 +1,6 @@
 package com.wordcloud.core.controller;
 
 import com.wordcloud.core.dto.ResultDto;
-import com.wordcloud.core.model.WordCount;
 import com.wordcloud.core.service.WordCloudService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
