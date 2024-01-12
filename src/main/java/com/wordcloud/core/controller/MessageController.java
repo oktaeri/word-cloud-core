@@ -21,12 +21,13 @@ public class MessageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
+                                             @RequestParam("minimum") Integer minimumCount) throws IOException {
 
         byte[] fileContent = file.getBytes();
         String token = tokenService.generateAndSaveToken();
 
-        UploadDto uploadDto = new UploadDto(token, fileContent);
+        UploadDto uploadDto = new UploadDto(token, fileContent, minimumCount);
 
         producer.sendMessage(uploadDto);
 
