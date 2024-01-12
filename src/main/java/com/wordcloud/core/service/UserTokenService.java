@@ -22,7 +22,7 @@ public class UserTokenService {
             generatedToken = generateRandomToken();
         } while (tokenExists(generatedToken));
 
-        UserToken userToken = new UserToken(generatedToken, LocalDate.now().plusDays(3));
+        UserToken userToken = new UserToken(generatedToken, LocalDate.now().minusDays(3));
         userTokenRepository.save(userToken);
         return userToken.getToken();
     }
