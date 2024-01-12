@@ -11,11 +11,11 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1")
-public class MessageController {
+public class UploadController {
     private RabbitMQProducer producer;
     private UserTokenService tokenService;
 
-    public MessageController(RabbitMQProducer producer, UserTokenService tokenService) {
+    public UploadController(RabbitMQProducer producer, UserTokenService tokenService) {
         this.producer = producer;
         this.tokenService = tokenService;
     }
