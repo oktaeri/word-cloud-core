@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,6 +24,10 @@ public class UploadController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
                                              @RequestParam(value = "minimum", required = false, defaultValue = "0") Integer minimumCount) throws IOException {
+
+        if (!Objects.equals(file.getContentType(), "text/plain")) {
+            return ResponseEntity.badRequest().body("Only .txt files are allowed.");
+        }
 
         byte[] fileContent = file.getBytes();
         String token = tokenService.generateAndSaveToken();
