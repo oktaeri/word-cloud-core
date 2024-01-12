@@ -22,8 +22,10 @@ public class RabbitMQProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(UploadDto testDto) {
-        LOGGER.info(String.format("Message sent -> %s", testDto));
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, testDto);
+    public void sendMessage(UploadDto uploadDto) {
+        LOGGER.info(String.format("Message sent -> Token: %s MinCount: %s",
+                uploadDto.getUserToken(),
+                uploadDto.getMinimumCount()));
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, uploadDto);
     }
 }
