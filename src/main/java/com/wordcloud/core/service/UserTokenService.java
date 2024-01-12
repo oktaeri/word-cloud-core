@@ -5,6 +5,8 @@ import com.wordcloud.core.repository.UserTokenRepository;
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class UserTokenService {
     private final UserTokenRepository userTokenRepository;
@@ -20,7 +22,7 @@ public class UserTokenService {
             generatedToken = generateRandomToken();
         } while (tokenExists(generatedToken));
 
-        UserToken userToken = new UserToken(generatedToken);
+        UserToken userToken = new UserToken(generatedToken, LocalDate.now().plusDays(3));
         userTokenRepository.save(userToken);
         return userToken.getToken();
     }
