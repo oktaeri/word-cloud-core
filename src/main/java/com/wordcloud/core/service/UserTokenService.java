@@ -21,12 +21,12 @@ public class UserTokenService {
         } while (tokenExists(generatedToken));
 
         UserToken userToken = new UserToken(generatedToken);
-        userTokenRepository.postToken(userToken);
+        userTokenRepository.save(userToken);
         return userToken.getToken();
     }
 
     private boolean tokenExists(String token) {
-        UserToken existingToken = userTokenRepository.getTokenByText(token);
+        UserToken existingToken = userTokenRepository.findByToken(token);
         return existingToken != null;
     }
 
