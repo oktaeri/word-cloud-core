@@ -23,9 +23,11 @@ public class RabbitMQProducer {
     }
 
     public void sendMessage(UploadDto uploadDto) {
-        LOGGER.info(String.format("Message sent -> Token: %s MinCount: %s",
+        LOGGER.info(String.format("Message sent -> Token: %s MinCount: %s Filter: %s AnyCustom: %s",
                 uploadDto.getUserToken(),
-                uploadDto.getMinimumCount()));
+                uploadDto.getMinimumCount(),
+                uploadDto.isFilterCommonWords(),
+                !uploadDto.getFilterCustomWords().isEmpty()));
         rabbitTemplate.convertAndSend(exchangeName, routingKey, uploadDto);
     }
 }
