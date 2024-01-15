@@ -1,7 +1,9 @@
 package com.wordcloud.core.controller;
 
 import com.wordcloud.core.dto.ResultDto;
+import com.wordcloud.core.repository.UserTokenRepository;
 import com.wordcloud.core.service.WordCloudService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +22,13 @@ public class WordCloudController {
     }
 
     @GetMapping("/{userToken}")
-    public ResponseEntity<List<ResultDto>> getWordCounts(@PathVariable String userToken) {
+    public ResponseEntity<?> getWordCounts(@PathVariable String userToken) {
         List<ResultDto> wordCounts = wordCloudService.getUserResult(userToken);
+
+        if (wordCounts == null) {
+            String errorMessage = "Token not found: " + userToken;
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
 
         return ResponseEntity.ok(wordCounts);
     }

@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface UserTokenRepository extends JpaRepository<UserToken, UUID> {
     UserToken findByToken(String token);
     List<UserToken> findByExpirationDateBefore(LocalDate date);
+    boolean existsByToken(String token);
 }
