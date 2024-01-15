@@ -1,0 +1,2 @@
+ALTER TABLE word_count
+    ADD COLUMN word VARCHAR(255) NOT NULL;

@@ -27,6 +27,6 @@ public class WordCloudService {
     }
 
     private ResultDto mapToResultDto(WordCount wordCount) {
-        return new ResultDto(wordCount.getWord().getWord(), wordCount.getCount());
+        return new ResultDto(wordCount.getWord(), wordCount.getCount());
     }
 }
