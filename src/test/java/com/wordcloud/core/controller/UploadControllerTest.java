@@ -30,6 +30,8 @@ class UploadControllerTest {
     void uploadProvidingFile_shouldReturnOK() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "Test file hello".getBytes());
 
+        when(mockTokenService.generateAndSaveToken()).thenReturn("fakeTk");
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/upload")
                         .file(file)
                         .param("minimum", "5")
@@ -53,9 +55,12 @@ class UploadControllerTest {
     void uploadFile_shouldGenerateAndSaveToken() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "My awesome test file".getBytes());
 
+        when(mockTokenService.generateAndSaveToken()).thenReturn("fake12");
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/upload")
                         .file(file))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("fake12"));
 
         verify(mockTokenService, times(1)).generateAndSaveToken();
     }
