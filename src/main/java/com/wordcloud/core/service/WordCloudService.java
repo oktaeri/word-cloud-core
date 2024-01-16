@@ -29,7 +29,7 @@ public class WordCloudService {
 
         return wordCounts.stream()
                 .map(this::mapToResultDto)
-                .sorted(Comparator.comparing(ResultDto::getCount, Comparator.reverseOrder()))
+                .sorted(Comparator.comparing(ResultDto::getValue, Comparator.reverseOrder()))
                 .collect(Collectors.toList());
     }
 

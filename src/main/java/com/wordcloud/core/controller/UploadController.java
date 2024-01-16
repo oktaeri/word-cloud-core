@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
 public class UploadController {
     private final RabbitMQProducer producer;

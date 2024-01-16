@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResultDto {
-    private String word;
-    private Integer count;
+    private String text;
+    private Integer value;
 }
