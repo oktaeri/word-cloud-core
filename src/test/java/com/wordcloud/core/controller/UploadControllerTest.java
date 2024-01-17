@@ -64,4 +64,15 @@ class UploadControllerTest {
 
         verify(mockTokenService, times(1)).generateAndSaveToken();
     }
+
+    @Test
+    void uploadFile_shouldReturnBadRequestForEmptyFiles() throws Exception {
+        String expectedResponseString = "Uploaded file has no content.";
+        MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/upload")
+                        .file(file))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().string(expectedResponseString));
+    }
 }

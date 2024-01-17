@@ -29,7 +29,7 @@ public class UploadController {
                                              @RequestParam(value = "customWords", required = false, defaultValue = "") String customWords) throws IOException {
 
         if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("File required.");
+            return ResponseEntity.badRequest().body("Uploaded file has no content.");
         }
 
         if (!Objects.equals(file.getContentType(), "text/plain")) {
@@ -37,6 +37,7 @@ public class UploadController {
         }
 
         byte[] fileContent = file.getBytes();
+
         String token = tokenService.generateAndSaveToken();
 
         UploadDto uploadDto = new UploadDto(token, fileContent, minimumCount, filterCommonWords, customWords);
