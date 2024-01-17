@@ -1,6 +1,7 @@
 CREATE TABLE user_tokens (
                              id UUID PRIMARY KEY,
                              token VARCHAR(6) NOT NULL,
+                             processing bool,
                              expiration_date DATE
 );
 

@@ -32,6 +32,10 @@ public class WordCloudController {
 
         List<ResultDto> wordCounts = wordCloudService.getUserResult(userToken);
 
+        if (wordCounts.size() == 1 && wordCounts.get(0).getText().equals("Processing")) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Word counts are still being processed. Please check again later.");
+        }
+
         return ResponseEntity.ok(wordCounts);
     }
 }
