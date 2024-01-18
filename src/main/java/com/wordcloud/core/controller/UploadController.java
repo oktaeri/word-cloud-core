@@ -39,11 +39,9 @@ public class UploadController {
         byte[] fileContent = file.getBytes();
 
         String token = tokenService.generateAndSaveToken();
-
         UploadDto uploadDto = new UploadDto(token, fileContent, minimumCount, filterCommonWords, customWords);
 
         producer.sendMessage(uploadDto);
-
         return ResponseEntity.ok(token);
     }
 }
