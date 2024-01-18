@@ -36,7 +36,7 @@ class WordCloudControllerTest {
     @Test
     void getWordCounts_ValidToken_ReturnsWordCounts() throws Exception {
         LocalDate date = LocalDate.now();
-        UserToken existingToken = new UserToken("newtok", date); // Use the specific token
+        UserToken existingToken = new UserToken("newtok", date, false);
         when(mockUserTokenRepository.findByToken("newtok")).thenReturn(existingToken);
         when(mockWordCloudService.getUserResult("newtok")).thenReturn(List.of(new ResultDto("word1", 5), new ResultDto("word2", 3)));
 
