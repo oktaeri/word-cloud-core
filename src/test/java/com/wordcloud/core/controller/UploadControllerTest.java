@@ -27,7 +27,7 @@ class UploadControllerTest {
     private UserTokenService mockTokenService;
 
     @Test
-    void uploadProvidingFile_shouldReturnOK() throws Exception {
+    void whenUploadingCorrectFile_thenShouldReturnOK() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "Test file hello".getBytes());
 
         when(mockTokenService.generateAndSaveToken()).thenReturn("fakeTk");
@@ -41,7 +41,7 @@ class UploadControllerTest {
     }
 
     @Test
-    void uploadFile_shouldReturnBadRequestForNonTextPlainFiles() throws Exception {
+    void whenUploadingNonTextFile_thenShouldReturnBadRequest() throws Exception {
         String expectedResponseString = "Only .txt files are allowed.";
         MockMultipartFile file = new MockMultipartFile("file", "test.pdf", MediaType.APPLICATION_PDF_VALUE, "File content".getBytes());
 
@@ -52,7 +52,7 @@ class UploadControllerTest {
     }
 
     @Test
-    void uploadFile_shouldGenerateAndSaveToken() throws Exception {
+    void whenUploadingCorrectFile_thenShouldGenerateAndSaveUserToken() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "My awesome test file".getBytes());
 
         when(mockTokenService.generateAndSaveToken()).thenReturn("fake12");
@@ -66,7 +66,7 @@ class UploadControllerTest {
     }
 
     @Test
-    void uploadFile_shouldReturnBadRequestForEmptyFiles() throws Exception {
+    void whenUploadingEmptyFile_thenShouldReturnBadRequest() throws Exception {
         String expectedResponseString = "Uploaded file has no content.";
         MockMultipartFile file = new MockMultipartFile("file", "test.txt", MediaType.TEXT_PLAIN_VALUE, "".getBytes());
 

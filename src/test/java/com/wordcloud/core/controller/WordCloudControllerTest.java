@@ -34,7 +34,7 @@ class WordCloudControllerTest {
     private UserTokenRepository mockUserTokenRepository;
 
     @Test
-    void getWordCounts_ValidToken_ReturnsWordCounts() throws Exception {
+    void givenValidToken_whenGetWordCounts_thenShouldReturnOk() throws Exception {
         LocalDate date = LocalDate.now();
         UserToken existingToken = new UserToken("newtok", date, false);
         when(mockUserTokenRepository.findByToken("newtok")).thenReturn(existingToken);
@@ -45,7 +45,7 @@ class WordCloudControllerTest {
     }
 
     @Test
-    void getWordCounts_InvalidToken_ReturnsNotFound() throws Exception {
+    void givenInvalidToken_whenGetWordCounts_thenShouldReturnNotFound() throws Exception {
         when(mockUserTokenRepository.findByToken(anyString())).thenReturn(null);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/wordcloud/nontok"))
@@ -53,7 +53,7 @@ class WordCloudControllerTest {
     }
 
     @Test
-    void getWordCounts_NullToken_ReturnsNotFound() throws Exception {
+    void givenNoToken_whenGetWordCounts_thenShouldReturnNotFound() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/wordcloud/"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
