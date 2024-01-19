@@ -27,7 +27,7 @@ services:
       - wordcloud-network
 
   worker:
-    image: 'wordcloud-worker:1.0.5'
+    image: 'taeris/wordcloud-worker:latest'
     ports:
       - '8081:8081'
     depends_on:
@@ -38,7 +38,7 @@ services:
       - wordcloud-network
 
   core:
-    image: 'wordcloud-core:1.0.3'
+    image: 'taeris/wordcloud-core:latest'
     ports:
       - '8080:8080'
     depends_on:
@@ -50,7 +50,7 @@ services:
       - wordcloud-network
 
   front:
-    image: 'wordcloud-front:1.0.11'
+    image: 'taeris/wordcloud-front:latest'
     ports:
       - '3000:80'
     depends_on:
