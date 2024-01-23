@@ -39,9 +39,9 @@ that the user wants to filter out (can be used with/without common word filterin
 Once the request is sent, Core generates a random 6-character token for the user. <br>
 The user can use this token to retrieve their results.
 
-The request is sent to RabbitMQ, which in turn sends it to the Worker for processing.<br>
+The request is sent to RabbitMQ as a DTO, from where the Worker can consume and process it.<br>
 The Worker then parses the file contents, adding each word and its respective occurrence count
-into a map, while keeping in mind the user's options (if any were provided). <br>
+into a map, while keeping in mind the user's options (if any were provided).<br>
 The results get saved into the database.
 
 The API (core) can then fetch the results from the DB and display them to 
@@ -49,7 +49,7 @@ the user in the frontend.
 
 ### Frontend
 The user can insert their file and choose options from the form on the index page.<br>
-File input is the only required field, the file also can not be bigger than 100MB.
+File input is the only required field, the file also can not be bigger than 100MB.<br>
 File size is validated in both frontend and backend.
 
 If the user has to wait for their result, they are met with a pending screen. <br>
