@@ -21,6 +21,7 @@ and what are the roles of the different components.
 - JDK 17
 - Spring Boot
 - PostgreSQL 16
+- H2 db (test profile only) 
 - Flyway
 - React
   - Bootstrap for easy styling
